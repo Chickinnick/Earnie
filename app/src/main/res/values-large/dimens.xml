@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="edit_text_width">400dp</dimen>
+    <dimen name="logo_side">300dp</dimen>
+    <dimen name="text_size">18sp</dimen>
+    <dimen name="tick_side">35dp</dimen>
+</resources>

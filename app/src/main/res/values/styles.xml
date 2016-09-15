@@ -7,4 +7,23 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="EditTextEnter">
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_width">@dimen/edit_text_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="ButtonEnter">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:padding">6dp</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_width">@dimen/edit_text_width</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>

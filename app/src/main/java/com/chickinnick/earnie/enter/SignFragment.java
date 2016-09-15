@@ -13,8 +13,11 @@ import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.FragmentSignBinding;
 
 
-public class SignFragment extends Fragment {
+public class SignFragment extends Fragment implements View.OnClickListener {
 
+
+    private FragmentActionListener onFragmentActionListener;
+    private FragmentSignBinding fragmentSignBinding;
 
     public SignFragment() {
     }
@@ -37,7 +40,27 @@ public class SignFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentSignBinding fragmentSignBinding = DataBindingUtil.inflate(inflater , R.layout.fragment_sign, container, false);
+        fragmentSignBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign, container, false);
+        fragmentSignBinding.signUpBtn.setOnClickListener(this);
         return fragmentSignBinding.getRoot();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.login_btn:
+                //TODO: Validation of strings
+                String email = fragmentSignBinding.email.getText().toString();
+                String password = fragmentSignBinding.password.getText().toString();
+                onFragmentActionListener.onLogIn(email, password);
+                break;
+            case R.id.sign_up_btn:
+                onFragmentActionListener.onGoSignUp();
+                break;
+        }
+    }
+
+    public void setOnFragmentActionListener(FragmentActionListener onFragmentActionListener) {
+        this.onFragmentActionListener = onFragmentActionListener;
     }
 }
