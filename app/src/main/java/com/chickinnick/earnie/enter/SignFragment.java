@@ -1,6 +1,7 @@
 package com.chickinnick.earnie.enter;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,6 +43,14 @@ public class SignFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         fragmentSignBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign, container, false);
         fragmentSignBinding.signUpBtn.setOnClickListener(this);
+
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "Quicksand-Regular.ttf");
+        fragmentSignBinding.email.setTypeface(typeface);
+        fragmentSignBinding.password.setTypeface(typeface);
+        fragmentSignBinding.loginBtn.setTypeface(typeface);
+        fragmentSignBinding.orTv.setTypeface(typeface);
+        fragmentSignBinding.signUpBtn.setTypeface(typeface);
+
         return fragmentSignBinding.getRoot();
     }
 

@@ -66,9 +66,11 @@
                 android:layout_height="@dimen/tick_side" />
 
             <TextView
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:clickable="true"
                 android:id="@+id/text_agree"
-                android:gravity="center"
-                android:text="@string/i_agree"
+                android:gravity="center_vertical"
                 android:textSize="@dimen/text_size"
                 android:textColor="@color/white"
                 android:layout_width="match_parent"

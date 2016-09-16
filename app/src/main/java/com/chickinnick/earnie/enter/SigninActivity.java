@@ -1,5 +1,6 @@
 package com.chickinnick.earnie.enter;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.ActivitySigninBinding;
+import com.chickinnick.earnie.tutorial.TutorActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,6 +20,7 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
     private ActivitySigninBinding signInActivityBinding;
     private SignFragment signFragment;
     private RegisterFragment registerFragment;
+    private TermsFragment termsFragment;
 
 
     @Override
@@ -28,6 +31,9 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
         registerFragment = RegisterFragment.newInstance();
         signFragment = SignFragment.newInstance();
         signFragment.setOnFragmentActionListener(this);
+
+        termsFragment = TermsFragment.newInstance();
+        termsFragment.setOnFragmentActionListener(this);
         registerFragment.setOnFragmentActionListener(this);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, splashFragment);
@@ -58,7 +64,8 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
 
     @Override
     public void onSignUp() {
-
+        Intent intent = new Intent(SigninActivity.this, TutorActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -78,6 +85,8 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
 
     @Override
     public void onGoReadTerms() {
-
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container, termsFragment);
+        fragmentTransaction.commit();
     }
 }
