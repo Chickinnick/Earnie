@@ -13,4 +13,5 @@
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="welcome_image_padding">70dp</dimen>
     <dimen name="rules_iv_h">200dp</dimen>
+    <dimen name="pagerindicator_margin">15dp</dimen>
 </resources>

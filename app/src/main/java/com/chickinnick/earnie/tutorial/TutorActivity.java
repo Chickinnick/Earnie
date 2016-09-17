@@ -1,24 +1,30 @@
 package com.chickinnick.earnie.tutorial;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.ActivityTutorBinding;
+import com.chickinnick.earnie.databinding.FragmentTutorBinding;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TutorActivity extends AppCompatActivity {
+public class TutorActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final long WELCOME_DELAY = 1500;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -30,9 +36,31 @@ public class TutorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tutor);
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        binding.doneBtn.setTypeface(Typeface.createFromAsset(getAssets(), "Quicksand-Regular.ttf"));
+        binding.doneBtn.setOnClickListener(this);
+
         binding.viewPager.setAdapter(mSectionsPagerAdapter);
+        binding.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                binding.indicatorPager.setSelectedItem(position, true);
+                if (position == 4) {
+                    binding.doneBtn.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
 
         new Timer().schedule(new TimerTask() {
             @Override
@@ -49,20 +77,25 @@ public class TutorActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.done_btn:
+                break;
+        }
+    }
+
     public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
+
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private FragmentTutorBinding pageBinding;
+        private String[] stringArray;
+        private Typeface typefaceRegular;
+        private Typeface typefaceBold;
 
         public PlaceholderFragment() {
         }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -74,47 +107,97 @@ public class TutorActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_tutor, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
+            pageBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tutor, container, false);
+            typefaceRegular = Typeface.createFromAsset(getActivity().getAssets(), "Quicksand-Regular.ttf");
+            typefaceBold = Typeface.createFromAsset(getActivity().getAssets(), "Quicksand-Bold.ttf");
+            int selectedIndex = getArguments().getInt(ARG_SECTION_NUMBER);
+            stringArray = getResources().getStringArray(R.array.pager_items);
+            initPage(selectedIndex);
+            return pageBinding.getRoot();
         }
+
+        private void initPage(int selectedIndex) {
+            String text = stringArray[selectedIndex];
+            switch (selectedIndex) {
+                case 0:
+                case 2: {
+                    pageBinding.textMain.setText(parseBoldText(text));
+                    break;
+                }
+                case 1: {
+                    pageBinding.textMain.setText(parseBoldText(text));
+                    pageBinding.tutorialImage.setImageResource(R.drawable.learnrules_image_0);
+                    break;
+                }
+                case 3:
+                    pageBinding.tutorialImage.setImageResource(R.drawable.learnrules_image_1);
+                    parsePair(text);
+                    break;
+                case 4:
+                    parsePair(text);
+                    pageBinding.tutorialImage.setImageResource(R.drawable.learnrules_image_2);
+                    break;
+            }
+        }
+
+        private void parsePair(String text) {
+            String[] pair = text.split("\\+");
+            pageBinding.textMain.setText(pair[0]);
+            pageBinding.textMain.setTypeface(typefaceRegular);
+            pageBinding.textSub.setText(pair[1]);
+            pageBinding.textSub.setTypeface(typefaceRegular);
+        }
+
+
+        private SpannableString parseBoldText(String t) {
+            int len = 0;
+            for (char aChar : t.toCharArray()) {
+                if (aChar == '{') {
+                    len++;
+                }
+            }
+            String text = t;
+            List<Pair<Integer, Integer>> pairList = new ArrayList<>();
+            SpannableString spannableString = null;
+            for (int i = 0; i < len; i++) {
+                int indexOfStart = text.indexOf("{");
+                int indexOfEnd = text.indexOf("}");
+                pairList.add(new Pair<Integer, Integer>(indexOfStart, indexOfEnd));
+                text = text.replaceFirst("\\{", " ");
+                text = text.replaceFirst("\\}", " ");
+            }
+            spannableString = new SpannableString(text);
+
+            for (Pair pair : pairList) {
+                spannableString.setSpan(new CustomTypefaceSpan("", typefaceRegular),
+                        0, (Integer) pair.first, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+                spannableString.setSpan(new CustomTypefaceSpan("", typefaceBold),
+                        (Integer) pair.first, (Integer) pair.second, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+                spannableString.setSpan(new CustomTypefaceSpan("", typefaceRegular),
+                        (Integer) pair.second, text.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+
+            }
+            return spannableString;
+        }
+
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance(position);
         }
-
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            return 5;
         }
-
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-            }
-            return null;
+            return "Page " + String.valueOf(position);
         }
     }
 }

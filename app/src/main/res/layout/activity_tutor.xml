@@ -24,6 +24,30 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <com.matthewtamlin.sliding_intro_screen_library.indicators.DotIndicator
+            android:id="@+id/indicator_pager"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/pagerindicator_margin"
+            app:numberOfDots="5"
+            app:selectedDotIndex="0" />
+
+        <Button
+            android:visibility="gone"
+            android:layout_margin="5dp"
+            android:textColor="@color/white"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/done_btn"
+            android:text="@string/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
         <ImageView
             android:id="@+id/welcome_iv"
             android:background="@color/colorPrimary"

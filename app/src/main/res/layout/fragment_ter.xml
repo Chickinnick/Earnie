@@ -18,7 +18,7 @@
             android:layout_below="@+id/logo"
             android:id="@+id/terms_title"
             android:layout_centerHorizontal="true"
-            android:textSize="22sp"
+            android:textSize="32sp"
             android:textColor="@color/white"
             android:text="@string/terms_of_service"
             android:layout_width="wrap_content"
