@@ -89,4 +89,9 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
         fragmentTransaction.add(R.id.fragment_container, termsFragment);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void onForgotPassword() {
+
+    }
 }

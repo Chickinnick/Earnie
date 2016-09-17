@@ -19,12 +19,13 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="skip">Skip</string>
     <string name="done">Done</string>
+    <string name="forgot_passwrd">Forgot password</string>
 
     <!-- {bold}  \ new sentence   -->
     <string-array name="pager_items">
         <item>If you see{1 ad}you get paid{1 earnie}</item>
         <item>You get{5 earnies}if you watch a Full video</item>
-        <item>You may{cash your earnies}every time you U$ 50.00 or more</item>
+        <item>You may{cash your earnies}every time you \n U$ 50.00 or more</item>
         <item>Get an Ad + Swipe or tap and it will leave your screen</item>
         <item>Tap and Hold it + to see more from this particular Ad</item>
     </string-array>

@@ -57,5 +57,18 @@
         style="@style/ButtonEnter" />
 
 
+    <TextView
+
+        android:layout_below="@+id/sign_up_btn"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:id="@+id/text_forgot"
+        android:gravity="center"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
 </RelativeLayout>
 </layout>

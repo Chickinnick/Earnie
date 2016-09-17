@@ -12,4 +12,6 @@ public interface FragmentActionListener {
     void onLogInGoogle();
 
     void onGoReadTerms();
+
+    void onForgotPassword();
 }
