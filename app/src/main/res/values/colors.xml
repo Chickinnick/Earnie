@@ -9,4 +9,6 @@
     <color name="green_dark">#306A35</color>
     <color name="green">#37B056</color>
     <color name="grey_bg">#EEEEEE</color>
+    <color name="toolbar_title_blue">#7293CB</color>
+    <color name="yellow">#F7B100</color>
 </resources>

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.FragmentRegBinding;
 
@@ -44,7 +45,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         fragmentRegisterBinding.textAgree.setMovementMethod(LinkMovementMethod.getInstance());
         fragmentRegisterBinding.textAgree.setText(initStringWithLink());
 
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "Quicksand-Regular.ttf");
+        Typeface typeface = EarineApp.getRegularTypeface();
         fragmentRegisterBinding.signUp.setTypeface(typeface);
         fragmentRegisterBinding.firstName.setTypeface(typeface);
         fragmentRegisterBinding.lastName.setTypeface(typeface);

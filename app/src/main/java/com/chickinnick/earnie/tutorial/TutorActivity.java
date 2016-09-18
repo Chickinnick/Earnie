@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.ActivityTutorBinding;
 import com.chickinnick.earnie.databinding.FragmentTutorBinding;
@@ -111,8 +112,8 @@ public class TutorActivity extends AppCompatActivity implements View.OnClickList
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             pageBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tutor, container, false);
-            typefaceRegular = Typeface.createFromAsset(getActivity().getAssets(), "Quicksand-Regular.ttf");
-            typefaceBold = Typeface.createFromAsset(getActivity().getAssets(), "Quicksand-Bold.ttf");
+            typefaceRegular = EarineApp.getRegularTypeface();
+            typefaceBold = EarineApp.getBoldTypeface();
             int selectedIndex = getArguments().getInt(ARG_SECTION_NUMBER);
             stringArray = getResources().getStringArray(R.array.pager_items);
             initPage(selectedIndex);

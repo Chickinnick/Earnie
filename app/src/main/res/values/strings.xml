@@ -20,6 +20,9 @@
     <string name="skip">Skip</string>
     <string name="done">Done</string>
     <string name="forgot_passwrd">Forgot password</string>
+    <string name="wallet">Wallet</string>
+    <string name="earnies">earnies</string>
+    <string name="cash_it">Cash it!</string>
 
     <!-- {bold}  \ new sentence   -->
     <string-array name="pager_items">

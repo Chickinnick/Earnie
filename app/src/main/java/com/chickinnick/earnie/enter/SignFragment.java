@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.FragmentSignBinding;
 
@@ -48,7 +49,7 @@ public class SignFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         fragmentSignBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign, container, false);
         fragmentSignBinding.signUpBtn.setOnClickListener(this);
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "Quicksand-Regular.ttf");
+        Typeface typeface = EarineApp.getRegularTypeface();
         fragmentSignBinding.email.setTypeface(typeface);
         fragmentSignBinding.password.setTypeface(typeface);
         fragmentSignBinding.loginBtn.setTypeface(typeface);
