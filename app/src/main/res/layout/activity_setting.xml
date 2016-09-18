@@ -1,11 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.chickinnick.earnie.home.SettingsActivity">
 
+
+        <android.support.v7.widget.Toolbar
+
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/toolbar_title_blue"
+                android:maxLines="1"
+                android:id="@+id/title"
+                android:text="@string/settings"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/drawer_btn"
+                android:layout_gravity="start"
+                android:background="@drawable/ic_menu_drawer_back"
+                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:padding="2dp"
+                android:width="25dp" />
+        </android.support.v7.widget.Toolbar>
+
+
+        <RelativeLayout
+            android:layout_below="@+id/toolbar"
+            android:id="@+id/content_coteainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:background="@drawable/main_activity_background"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatButton
+                    android:background="@drawable/btn_setting_list_background"
+                    android:text="@string/payment_methods"
+                    android:id="@+id/payment_methods"
+                    style="@style/ListButton" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:background="@drawable/btn_setting_list_background"
+                    android:text="@string/profile"
+                    android:id="@+id/profile"
+                    style="@style/ListButton" />
+
+                <View
+                    android:layout_marginBottom="@dimen/divider_margin"
+                    android:layout_marginTop="@dimen/divider_margin"
+                    android:background="@color/grey_middle"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+
+                <android.support.v7.widget.AppCompatButton
+                    android:background="@drawable/btn_setting_list_background"
+                    android:text="@string/about_earnie"
+                    android:id="@+id/about"
+                    style="@style/ListButton" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:background="@drawable/btn_setting_list_background"
+                    android:text="@string/ad_categories"
+                    android:id="@+id/ad_categories"
+                    style="@style/ListButton" />
+
+
+                <View
+                    android:background="@color/grey_middle"
+                    android:layout_marginBottom="@dimen/divider_margin"
+                    android:layout_marginTop="@dimen/divider_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+                <RelativeLayout
+                    android:background="@color/white"
+                    android:id="@+id/freq_seekbar_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_margin="@dimen/activity_horizontal_margin"
+                        android:textSize="@dimen/text_size"
+                        android:text="@string/ad_frequency"
+                        android:textColor="@color/text_default_dark"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/ad_freq_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <android.support.v7.widget.AppCompatSeekBar
+                        android:max="2"
+                        android:layout_below="@+id/ad_freq_title"
+                        android:id="@+id/ad_freq_seekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <RelativeLayout
+                        android:layout_below="@+id/ad_freq_seekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:background="@android:color/transparent"
+                            android:id="@+id/low"
+                            android:padding="@dimen/activity_horizontal_margin"
+                            android:textSize="@dimen/text_size"
+                            android:textColor="@color/text_default_dark"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:text="@string/low"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <Button
+                            android:background="@android:color/transparent"
+                            android:id="@+id/norm"
+                            android:padding="@dimen/activity_horizontal_margin"
+                            android:textSize="@dimen/text_size"
+                            android:textColor="@color/toolbar_title_blue"
+                            android:layout_centerInParent="true"
+                            android:text="@string/normal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <Button
+                            android:background="@android:color/transparent"
+                            android:id="@+id/high"
+                            android:padding="@dimen/activity_horizontal_margin"
+                            android:textSize="@dimen/text_size"
+                            android:textColor="@color/text_default_dark"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:text="@string/high"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </layout>

@@ -23,6 +23,15 @@
     <string name="wallet">Wallet</string>
     <string name="earnies">earnies</string>
     <string name="cash_it">Cash it!</string>
+    <string name="payment_methods">Payment methods</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="about_earnie">About Earnie</string>
+    <string name="ad_categories">Ad categories</string>
+    <string name="low">Low</string>
+    <string name="high">High</string>
+    <string name="ad_frequency">Ad frequency</string>
+    <string name="normal">Normal</string>
 
     <!-- {bold}  \ new sentence   -->
     <string-array name="pager_items">

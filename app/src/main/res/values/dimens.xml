@@ -16,4 +16,5 @@
     <dimen name="pagerindicator_margin">15dp</dimen>
     <dimen name="digit_size">120sp</dimen>
     <dimen name="earnies">22sp</dimen>
+    <dimen name="divider_margin">20dp</dimen>
 </resources>
