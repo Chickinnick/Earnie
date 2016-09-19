@@ -1,6 +1,5 @@
 package com.chickinnick.earnie.home;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -31,6 +30,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         activitySettingsBinding.adCategories.setTypeface(typeface);
         activitySettingsBinding.adFreqTitle.setTypeface(typeface);
 
+        activitySettingsBinding.drawerBtn.setOnClickListener(this);
         activitySettingsBinding.paymentMethods.setOnClickListener(this);
         activitySettingsBinding.profile.setOnClickListener(this);
 
@@ -66,7 +66,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
+        moveTaskToBack(true);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         super.onBackPressed();
     }
@@ -78,7 +78,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.payment_methods:
                 break;
-
+            case R.id.drawer_btn:
+                onBackPressed();
+                break;
         }
     }
 

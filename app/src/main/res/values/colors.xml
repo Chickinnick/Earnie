@@ -13,4 +13,6 @@
     <color name="yellow">#F7B100</color>
     <color name="text_default_dark">#4B4B4B</color>
     <color name="grey_middle">#ACACAC</color>
+    <color name="blue">#3C5588</color>
+    <color name="blue_dark">#385181</color>
 </resources>

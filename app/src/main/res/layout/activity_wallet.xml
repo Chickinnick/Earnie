@@ -5,10 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-        tools:context=".home.HomeActivity">
+        tools:context=".home.WalletActivity">
 
         <android.support.v7.widget.Toolbar
-
             android:minHeight="?attr/actionBarSize"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -35,7 +34,6 @@
                 android:width="25dp" />
         </android.support.v7.widget.Toolbar>
 
-
         <RelativeLayout
             android:background="@drawable/main_activity_background"
             android:layout_width="match_parent"
@@ -45,19 +43,17 @@
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:layout_below="@+id/toolbar">
 
-            <RelativeLayout
-                android:id="@+id/earnies_value_container"
-                android:layout_centerInParent="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
 
                 <TextView
+                    android:layout_centerInParent="true"
+                    android:text="2"
                     android:textColor="@color/yellow"
                     android:layout_centerHorizontal="true"
                     android:textSize="@dimen/digit_size"
                     android:id="@+id/earnies_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="299dp"
+                    android:layout_height="200dp" />
 
                 <TextView
                     android:textColor="@color/yellow"
@@ -69,13 +65,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-            </RelativeLayout>
 
 
             <android.support.v7.widget.AppCompatButton
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="35dp"
                 android:text="@string/cash_it"
-                android:layout_below="@+id/earnies_value_container"
+                android:layout_below="@+id/earnies"
                 android:id="@+id/cash_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

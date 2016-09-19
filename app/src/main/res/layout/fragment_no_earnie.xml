@@ -1,0 +1,39 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/main_activity_background"
+        android:padding="@dimen/activity_horizontal_margin"
+        tools:context="com.chickinnick.earnie.home.NoEarnieFragment">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:id="@+id/cannot_cash_tv"
+            android:textColor="@color/text_default_dark"
+            android:textSize="@dimen/text_size"
+            android:text="@string/cannot_cash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_marginBottom="@dimen/divider_margin"
+            android:layout_marginTop="@dimen/divider_margin"
+            android:background="@color/grey_middle"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_accent_bg_selector"
+            android:text="@string/payment_method"
+            android:id="@+id/payment_method_btn"
+            android:layout_width="@dimen/edit_text_width"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>

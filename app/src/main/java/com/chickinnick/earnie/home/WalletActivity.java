@@ -9,16 +9,16 @@ import android.view.View;
 
 import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
-import com.chickinnick.earnie.databinding.ActivityHomeBinding;
+import com.chickinnick.earnie.databinding.ActivityWalletBinding;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class WalletActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ActivityHomeBinding binding;
+    private ActivityWalletBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_wallet);
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
@@ -38,9 +38,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.drawer_btn:
-                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                startActivity(new Intent(WalletActivity.this, SettingsActivity.class));
+                break;
+            case R.id.cash_btn:
+                Intent intent = new Intent(WalletActivity.this, CashActivity.class);
+                if (binding.earniesValue.getText() == "0") {
+                    intent.putExtra(CashActivity.EXTRA_FLAG_KEY_CASH, CashActivity.EXTRA_FLAG_CASH_NO_EARNIE);
+                } else {
+                    intent.putExtra(CashActivity.EXTRA_FLAG_KEY_CASH, CashActivity.EXTRA_FLAG_CASH_OK);
+                }
+                startActivity(intent);
                 break;
         }
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 }

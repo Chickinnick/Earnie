@@ -32,6 +32,8 @@
     <string name="high">High</string>
     <string name="ad_frequency">Ad frequency</string>
     <string name="normal">Normal</string>
+    <string name="cannot_cash">You can only cash your earnies after setting up an account of yours we can transfer the money, and after you make at least U$ 50 or 5000 earnies</string>
+    <string name="payment_method">Payment method</string>
 
     <!-- {bold}  \ new sentence   -->
     <string-array name="pager_items">

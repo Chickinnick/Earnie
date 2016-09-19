@@ -20,7 +20,7 @@ import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.ActivityTutorBinding;
 import com.chickinnick.earnie.databinding.FragmentTutorBinding;
-import com.chickinnick.earnie.home.HomeActivity;
+import com.chickinnick.earnie.home.WalletActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +84,7 @@ public class TutorActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.done_btn:
-                startActivity(new Intent(TutorActivity.this, HomeActivity.class));
+                startActivity(new Intent(TutorActivity.this, WalletActivity.class));
                 break;
         }
     }

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".home.HomeActivity"
+            android:name=".home.WalletActivity"
             android:launchMode="singleInstance" />
         <activity android:name=".enter.SigninActivity">
             <intent-filter>
@@ -25,7 +25,8 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".home.SettingsActivity"
-            android:launchMode="singleInstance"></activity>
+            android:launchMode="singleTop" />
+        <activity android:name=".home.CashActivity" />
     </application>
 
 </manifest>
