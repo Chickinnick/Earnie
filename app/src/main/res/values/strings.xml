@@ -34,6 +34,10 @@
     <string name="normal">Normal</string>
     <string name="cannot_cash">You can only cash your earnies after setting up an account of yours we can transfer the money, and after you make at least U$ 50 or 5000 earnies</string>
     <string name="payment_method">Payment method</string>
+    <string name="cash_your_earnies">Cash your earnies</string>
+    <string name="confirm">Confirm</string>
+    <string name="amount">Amount</string>
+    <string name="cash_it_all">Cash it all</string>
 
     <!-- {bold}  \ new sentence   -->
     <string-array name="pager_items">

@@ -42,7 +42,7 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.cash_btn:
                 Intent intent = new Intent(WalletActivity.this, CashActivity.class);
-                if (binding.earniesValue.getText() == "0") {
+                if (binding.earniesValue.getText() != "0") {
                     intent.putExtra(CashActivity.EXTRA_FLAG_KEY_CASH, CashActivity.EXTRA_FLAG_CASH_NO_EARNIE);
                 } else {
                     intent.putExtra(CashActivity.EXTRA_FLAG_KEY_CASH, CashActivity.EXTRA_FLAG_CASH_OK);
