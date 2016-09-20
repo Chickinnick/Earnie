@@ -2,7 +2,7 @@
 <resources>
     <dimen name="edit_text_width">400dp</dimen>
     <dimen name="logo_side">300dp</dimen>
-    <dimen name="text_size">18sp</dimen>
+    <dimen name="text_size">20sp</dimen>
     <dimen name="tick_side">35dp</dimen>
     <dimen name="text_size_big">30dp</dimen>
     <dimen name="terms_scroll_h">350dp</dimen>

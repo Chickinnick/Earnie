@@ -38,6 +38,7 @@
     <string name="confirm">Confirm</string>
     <string name="amount">Amount</string>
     <string name="cash_it_all">Cash it all</string>
+    <string name="cancel">Cancel</string>
 
     <!-- {bold}  \ new sentence   -->
     <string-array name="pager_items">

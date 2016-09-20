@@ -33,6 +33,12 @@ public class TermsFragment extends Fragment {
         FragmentTerBinding termsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_ter, container, false);
         Typeface typeface = EarineApp.getRegularTypeface();
         termsBinding.backBtn.setTypeface(typeface);
+        termsBinding.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
         termsBinding.termsTitle.setTypeface(typeface);
         termsBinding.termsText.setTypeface(typeface);
 
@@ -43,7 +49,4 @@ public class TermsFragment extends Fragment {
         this.fragmentActionListener = fragmentActionListener;
     }
 
-    public void onBack(View view) {
-        getActivity().onBackPressed();
-    }
 }

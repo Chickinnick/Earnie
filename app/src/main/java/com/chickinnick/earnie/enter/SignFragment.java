@@ -3,14 +3,12 @@ package com.chickinnick.earnie.enter;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +23,7 @@ public class SignFragment extends Fragment implements View.OnClickListener {
 
     private FragmentActionListener onFragmentActionListener;
     private FragmentSignBinding fragmentSignBinding;
+    private FragmentSignBinding binding;
 
     public SignFragment() {
     }
@@ -37,11 +36,6 @@ public class SignFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setSharedElementEnterTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.fade));
-            setExitTransition(TransitionInflater.from(getActivity()).inflateTransition(android.R.transition.fade));
-        }
     }
 
     @Override

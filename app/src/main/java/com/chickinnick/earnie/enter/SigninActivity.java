@@ -2,12 +2,15 @@ package com.chickinnick.earnie.enter;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
 
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.ActivitySigninBinding;
+import com.chickinnick.earnie.enter.transition.DetailsTransition;
 import com.chickinnick.earnie.tutorial.TutorActivity;
 
 import java.util.Timer;
@@ -32,6 +35,15 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
         signFragment = SignFragment.newInstance();
         signFragment.setOnFragmentActionListener(this);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            signFragment.setSharedElementEnterTransition(new DetailsTransition());
+            signFragment.setEnterTransition(new Fade());
+            splashFragment.setExitTransition(new Fade());
+            signFragment.setSharedElementReturnTransition(new DetailsTransition());
+
+        }
+
+
         termsFragment = TermsFragment.newInstance();
         termsFragment.setOnFragmentActionListener(this);
         registerFragment.setOnFragmentActionListener(this);
@@ -45,7 +57,9 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
             public void run() {
 
                 final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.addSharedElement(splashFragment.getBinding().logo, "logo");TODO: transaction
+                fragmentTransaction.addSharedElement(splashFragment.getBinding().logo, "logotype");
+
+                //TODO: transaction
                 fragmentTransaction.replace(R.id.fragment_container, signFragment);
                 fragmentTransaction.commit();
 
@@ -87,6 +101,7 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
     public void onGoReadTerms() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, termsFragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

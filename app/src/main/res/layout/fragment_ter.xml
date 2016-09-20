@@ -44,7 +44,6 @@
         </ScrollView>
 
         <Button
-            android:onClick="onBack"
             android:id="@+id/back_btn"
             android:background="@drawable/btn_background_selector_sign"
             android:layout_below="@+id/scroll_text"

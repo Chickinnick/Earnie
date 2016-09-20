@@ -65,13 +65,25 @@
 
 
         <android.support.v7.widget.AppCompatButton
+
+            android:layout_margin="@dimen/divider_margin"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/white"
             android:background="@drawable/btn_accent_bg_selector"
             android:text="@string/confirm"
             android:textSize="@dimen/text_size"
-
             android:id="@+id/confirm_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_margin="2dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/text_default_dark"
+            android:background="@android:color/transparent"
+            android:text="@string/cancel"
+            android:textSize="@dimen/text_size"
+            android:id="@+id/cancel_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
