@@ -3,17 +3,22 @@ package com.chickinnick.earnie.home;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
+import com.chickinnick.earnie.adcore.AdOverlayService;
 import com.chickinnick.earnie.databinding.ActivityWalletBinding;
 import com.chickinnick.earnie.model.User;
 
 public class WalletActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final int OVERLAY_PERMISSION_REQUEST_CODE = 1234;
     private ActivityWalletBinding binding;
 
     @Override
@@ -38,8 +43,29 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
         User user = new User();
         user.setName("Robin");
         binding.setUser(user);
-
         binding.userMessage.setTypeface(typeface);
+
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, OVERLAY_PERMISSION_REQUEST_CODE);
+            } else {
+                startAdvertService();
+            }
+        } else {
+            startAdvertService();
+        }
+
+
+
+
+    }
+
+    private void startAdvertService() {
+        Intent intent = new Intent(this, AdOverlayService.class);
+        startService(intent);
     }
 
     @Override
@@ -60,5 +86,14 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
         }
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == OVERLAY_PERMISSION_REQUEST_CODE) {
+            startAdvertService();
+        }
     }
 }

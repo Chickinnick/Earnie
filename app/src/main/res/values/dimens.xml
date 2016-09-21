@@ -17,4 +17,9 @@
     <dimen name="digit_size">120sp</dimen>
     <dimen name="earnies">40sp</dimen>
     <dimen name="divider_margin">20dp</dimen>
+
+
+    <!--advertisment-->
+    <dimen name="image_w">400dp</dimen>
+    <dimen name="image_h">320dp</dimen>
 </resources>
