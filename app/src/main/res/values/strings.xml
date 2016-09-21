@@ -39,6 +39,9 @@
     <string name="amount">Amount</string>
     <string name="cash_it_all">Cash it all</string>
     <string name="cancel">Cancel</string>
+    <string name="hello_user">Hello, </string>
+    <string name="sign">!</string>
+    <string name="right_now_you_got">Right now you got</string>
 
     <!-- {bold}  \ new sentence   -->
     <string-array name="pager_items">

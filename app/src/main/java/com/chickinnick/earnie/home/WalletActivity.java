@@ -10,6 +10,7 @@ import android.view.View;
 import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.ActivityWalletBinding;
+import com.chickinnick.earnie.model.User;
 
 public class WalletActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,6 +33,13 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
         binding.earniesValue.setText("0");//TODO attach model
         binding.earniesValue.setTypeface(earniesTf);
         binding.earnies.setTypeface(earniesTf);
+        binding.youGotTv.setTypeface(earniesTf);
+
+        User user = new User();
+        user.setName("Robin");
+        binding.setUser(user);
+
+        binding.userMessage.setTypeface(typeface);
     }
 
     @Override

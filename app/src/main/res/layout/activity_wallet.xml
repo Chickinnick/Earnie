@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="user"
+            type="com.chickinnick.earnie.model.User" />
+    </data>
+
+
     <RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -44,16 +52,35 @@
             android:layout_below="@+id/toolbar">
 
 
+            <android.support.v7.widget.AppCompatTextView
+                android:textSize="@dimen/text_size"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@+id/you_got_tv"
+                android:id="@+id/user_message"
+                android:text="@{@string/hello_user + user.name + @string/sign}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:textSize="@dimen/text_size"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@+id/earnies_value"
+                android:id="@+id/you_got_tv"
+                android:text="@string/right_now_you_got"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
                 <TextView
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    android:textAlignment="center"
                     android:layout_centerInParent="true"
                     android:text="2"
                     android:textColor="@color/yellow"
-                    android:layout_centerHorizontal="true"
                     android:textSize="@dimen/digit_size"
                     android:id="@+id/earnies_value"
-                    android:layout_width="299dp"
-                    android:layout_height="200dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:textColor="@color/yellow"
