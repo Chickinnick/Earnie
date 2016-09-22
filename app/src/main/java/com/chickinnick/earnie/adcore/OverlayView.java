@@ -78,10 +78,11 @@ public abstract class OverlayView extends RelativeLayout {
                         | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
 
-        Pair<Integer, Integer> savedXY = Paper.book().read(KEY_SAVED_ViEW_POSITION);
-        layoutParams.x = savedXY.first;
-        layoutParams.y = savedXY.second;
-        // layoutParams.gravity = getLayoutGravity();
+        Pair<Integer, Integer> savedXY = Paper.book().read(KEY_SAVED_ViEW_POSITION, null);
+        if (null != savedXY) {
+            layoutParams.x = savedXY.first;
+            layoutParams.y = savedXY.second;
+        }// layoutParams.gravity = getLayoutGravity();
     }
 
     private void inflateView() {
