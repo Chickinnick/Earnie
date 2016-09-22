@@ -3,7 +3,6 @@ package com.chickinnick.earnie.adcore;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.util.Pair;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -64,10 +63,6 @@ public abstract class OverlayView extends RelativeLayout {
         return (OverlayService) getContext();
     }
 
-    public int getLayoutGravity() {
-        return Gravity.CENTER;
-    }
-
     private void setupLayoutParams() {
         int imW = getResources().getDimensionPixelSize(R.dimen.image_w);
         int imH = getResources().getDimensionPixelSize(R.dimen.image_h);
@@ -82,7 +77,7 @@ public abstract class OverlayView extends RelativeLayout {
         if (null != savedXY) {
             layoutParams.x = savedXY.first;
             layoutParams.y = savedXY.second;
-        }// layoutParams.gravity = getLayoutGravity();
+        }
     }
 
     private void inflateView() {
@@ -105,38 +100,12 @@ public abstract class OverlayView extends RelativeLayout {
     protected void load() {
         inflateView();
         addView();
-
-    }
-
-    protected void unload() {
-        ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).removeView(this);
-        removeAllViews();
-    }
-
-    protected void reload() {
-        unload();
-        load();
     }
 
     public void destory() {
         ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).removeView(this);
     }
 
-
-
-    protected boolean showNotificationHidden() {
-        // Override this to configure the notification to remain even when the
-        // overlay is invisible.
-        return true;
-    }
-
-    protected boolean onVisibilityToChange(int visibility) {
-        return true;
-    }
-
-    protected View animationView() {
-        return this;
-    }
 
     protected void hide() {
         super.setVisibility(View.GONE);
@@ -145,54 +114,5 @@ public abstract class OverlayView extends RelativeLayout {
     protected void show() {
         super.setVisibility(View.VISIBLE);
     }
-
-    @Override
-    public void setVisibility(int visibility) {
-        if (visibility == View.VISIBLE) {
-            getService().moveToForeground(notificationId, !showNotificationHidden());
-        } else {
-            getService().moveToBackground(notificationId, !showNotificationHidden());
-        }
-
-        if (getVisibility() != visibility) {
-            if (onVisibilityToChange(visibility)) {
-                super.setVisibility(visibility);
-            }
-        }
-    }
-
-    protected int getLeftOnScreen() {
-        int[] location = new int[2];
-
-        getLocationOnScreen(location);
-
-        return location[0];
-    }
-
-    protected int getTopOnScreen() {
-        int[] location = new int[2];
-
-        getLocationOnScreen(location);
-
-        return location[1];
-    }
-
-    protected boolean isInside(View view, float x, float y) {
-        // Use this to test if the X, Y coordinates of the MotionEvent are
-        // inside of the View specified.
-        int[] location = new int[2];
-        view.getLocationOnScreen(location);
-        if (x >= location[0]) {
-            if (x <= location[0] + view.getWidth()) {
-                if (y >= location[1]) {
-                    if (y <= location[1] + view.getHeight()) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
 
 }

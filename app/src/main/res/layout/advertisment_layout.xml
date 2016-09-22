@@ -3,11 +3,15 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@android:color/transparent">
 
+    <ImageView
+        android:src="@drawable/ic_move"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 
     <WebView
-        android:visibility="gone"
+        android:layout_marginTop="30dp"
         android:id="@+id/cover_layout"
         android:layout_width="@dimen/image_w"
         android:layout_height="@dimen/image_h" />

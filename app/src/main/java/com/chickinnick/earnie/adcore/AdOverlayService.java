@@ -45,16 +45,12 @@ public class AdOverlayService extends OverlayService {
     protected Notification foregroundNotification(int notificationId) {
         Notification.Builder builder = new Notification.Builder(AdOverlayService.this);
         builder.setAutoCancel(false);
-        builder.setTicker("this is ticker text");
         builder.setContentTitle("Earnie service");
         builder.setContentText("Tap to stop service");
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentIntent(notificationIntent());
         builder.setOngoing(true);
-        builder.setNumber(100);
-        builder.build();
-
-        return builder.getNotification();
+        return builder.build();
     }
 
 
