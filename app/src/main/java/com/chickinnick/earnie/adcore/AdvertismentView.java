@@ -15,6 +15,7 @@ public class AdvertismentView extends OverlayView {
         super(service, R.layout.advertisment_layout, 1);
     }
 
+
     public int getGravity() {
         return Gravity.TOP + Gravity.RIGHT;
     }
@@ -26,10 +27,6 @@ public class AdvertismentView extends OverlayView {
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-    }
-
-    @Override
-    void onClick() {
 
     }
 }
