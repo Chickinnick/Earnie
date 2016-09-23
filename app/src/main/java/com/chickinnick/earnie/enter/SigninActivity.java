@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
+import android.view.View;
 
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.ActivitySigninBinding;
@@ -29,6 +30,9 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
         signInActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_signin);
         splashFragment = SplashFragment.newInstance();
         registerFragment = RegisterFragment.newInstance();
@@ -72,7 +76,10 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
     @Override
     public void onGoSignUp() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         fragmentTransaction.add(R.id.fragment_container, registerFragment);
+        fragmentTransaction.addToBackStack(null);
+
         fragmentTransaction.commit();
     }
 
@@ -100,6 +107,8 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
     @Override
     public void onGoReadTerms() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+
         fragmentTransaction.add(R.id.fragment_container, termsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

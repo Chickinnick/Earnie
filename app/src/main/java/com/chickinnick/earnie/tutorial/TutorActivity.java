@@ -38,6 +38,9 @@ public class TutorActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tutor);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         binding.doneBtn.setTypeface(Typeface.createFromAsset(getAssets(), "Quicksand-Regular.ttf"));
@@ -72,6 +75,8 @@ public class TutorActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void run() {
                         binding.welcomeIv.setVisibility(View.GONE);
+                        binding.rules.setVisibility(View.VISIBLE);
+                        binding.viewPager.setVisibility(View.VISIBLE);
                     }
                 });
             }

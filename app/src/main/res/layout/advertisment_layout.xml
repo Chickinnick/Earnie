@@ -6,12 +6,15 @@
     android:background="@android:color/transparent">
 
     <ImageView
+        android:layout_margin="5dp"
+        android:id="@+id/move_control"
         android:src="@drawable/ic_move"
         android:layout_width="30dp"
         android:layout_height="30dp" />
 
     <WebView
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/move_control"
+
         android:id="@+id/cover_layout"
         android:layout_width="@dimen/image_w"
         android:layout_height="@dimen/image_h" />
