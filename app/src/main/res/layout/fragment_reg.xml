@@ -84,6 +84,13 @@
             android:text="@string/sign_up"
             style="@style/ButtonEnter" />
 
+        <Button
+            android:id="@+id/sign_up_facebook"
+            android:background="@drawable/btn_background_selector_fb"
+            android:layout_below="@+id/sign_up"
+            android:text="@string/log_in_with_fb"
+            style="@style/ButtonEnter" />
+
 
         <TextView
             android:layout_centerHorizontal="true"

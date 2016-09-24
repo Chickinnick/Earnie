@@ -9,13 +9,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.transition.Fade;
 import android.view.View;
 
+import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.ActivitySigninBinding;
 import com.chickinnick.earnie.enter.transition.DetailsTransition;
+import com.chickinnick.earnie.home.WalletActivity;
+import com.chickinnick.earnie.model.User;
+import com.chickinnick.earnie.model.UserBuilder;
+import com.chickinnick.earnie.social.FacebookManager;
 import com.chickinnick.earnie.tutorial.TutorActivity;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginResult;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import io.paperdb.Paper;
 
 public class SigninActivity extends AppCompatActivity implements FragmentActionListener {
 
@@ -33,11 +49,15 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
+
+
         signInActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_signin);
         splashFragment = SplashFragment.newInstance();
         registerFragment = RegisterFragment.newInstance();
         signFragment = SignFragment.newInstance();
         signFragment.setOnFragmentActionListener(this);
+
+        FacebookManager.getInstance().init();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             signFragment.setSharedElementEnterTransition(new DetailsTransition());
@@ -55,7 +75,7 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
         fragmentTransaction.replace(R.id.fragment_container, splashFragment);
         fragmentTransaction.commit();
 
-
+        if (null == Paper.book().read(EarineApp.KEY_CURRENT_USER)) {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
@@ -69,7 +89,9 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
 
             }
         }, SPLASH_DELAY);
-
+        } else {
+            startActivity(new Intent(SigninActivity.this, WalletActivity.class));
+        }
     }
 
 
@@ -84,7 +106,8 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
     }
 
     @Override
-    public void onSignUp() {
+    public void onSignUp(User user) {
+        Paper.book().write(EarineApp.KEY_CURRENT_USER, user);
         Intent intent = new Intent(SigninActivity.this, TutorActivity.class);
         startActivity(intent);
     }
@@ -96,6 +119,8 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
 
     @Override
     public void onLogInFB() {
+        FacebookManager.getInstance().setLoginCallback(facebookCallback);
+        FacebookManager.getInstance().logIn(this);
 
     }
 
@@ -118,4 +143,59 @@ public class SigninActivity extends AppCompatActivity implements FragmentActionL
     public void onForgotPassword() {
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        FacebookManager.getInstance().onResult(requestCode, resultCode, data);
+
+    }
+
+    FacebookCallback<LoginResult> facebookCallback = new FacebookCallback<LoginResult>() {
+        @Override
+        public void onSuccess(LoginResult loginResult) {
+            FacebookManager.getInstance().updateStatus();
+            if (loginResult.getAccessToken() != null) {
+
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                String email = null;
+                                try {
+                                    email = object.getString("email");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                Profile currentProfile = Profile.getCurrentProfile();
+
+                                UserBuilder builder = new UserBuilder()
+                                        .setFirstName(currentProfile.getFirstName())
+                                        .setLastName(currentProfile.getLastName())
+                                        .setEmail(email)
+                                        .setProfilePictureUri(currentProfile.getProfilePictureUri(128, 128));
+
+                                onSignUp(builder.createUser());
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email");
+                request.setParameters(parameters);
+                request.executeAsync();
+
+
+            }
+        }
+
+        @Override
+        public void onCancel() {
+
+        }
+
+        @Override
+        public void onError(FacebookException error) {
+
+        }
+    };
 }

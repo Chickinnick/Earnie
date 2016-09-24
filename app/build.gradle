@@ -22,6 +22,9 @@ android {
         enabled = true
     }
 }
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -31,4 +34,5 @@ dependencies {
     compile 'io.paperdb:paperdb:1.5'
     compile 'com.android.support:design:23.4.0'
     compile 'com.matthew-tamlin:sliding-intro-screen:3.2.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
 }

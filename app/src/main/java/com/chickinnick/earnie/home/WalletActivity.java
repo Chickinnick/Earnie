@@ -16,6 +16,8 @@ import com.chickinnick.earnie.adcore.AdOverlayService;
 import com.chickinnick.earnie.databinding.ActivityWalletBinding;
 import com.chickinnick.earnie.model.User;
 
+import io.paperdb.Paper;
+
 public class WalletActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int OVERLAY_PERMISSION_REQUEST_CODE = 1234;
@@ -40,8 +42,7 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
         binding.earnies.setTypeface(earniesTf);
         binding.youGotTv.setTypeface(earniesTf);
 
-        User user = new User();
-        user.setName("Robin");
+        User user = Paper.book().read(EarineApp.KEY_CURRENT_USER);
         binding.setUser(user);
         binding.userMessage.setTypeface(typeface);
 
@@ -76,7 +77,7 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.cash_btn:
                 Intent intent = new Intent(WalletActivity.this, CashActivity.class);
-                if (binding.earniesValue.getText() != "0") {
+                if (binding.earniesValue.getText() == "0") {
                     intent.putExtra(CashActivity.EXTRA_FLAG_KEY_CASH, CashActivity.EXTRA_FLAG_CASH_NO_EARNIE);
                 } else {
                     intent.putExtra(CashActivity.EXTRA_FLAG_KEY_CASH, CashActivity.EXTRA_FLAG_CASH_OK);
