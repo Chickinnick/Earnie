@@ -5,6 +5,8 @@ import android.net.Uri;
 
 public class User {
 
+    private int earnieValue;
+
     private String name;
     private String surName;
     private String email;
@@ -48,5 +50,17 @@ public class User {
 
     public void setImageUri(Uri imageUri) {
         this.imageUri = imageUri;
+    }
+
+    public int getEarnieValue() {
+        return earnieValue;
+    }
+
+    public void setEarnieValue(int earnieValue) {
+        this.earnieValue = earnieValue;
+    }
+
+    public void incrementEarnie() {
+        ++earnieValue;
     }
 }

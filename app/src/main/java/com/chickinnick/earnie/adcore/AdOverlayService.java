@@ -23,10 +23,21 @@ public class AdOverlayService extends OverlayService {
         intentFilter.addAction(Intent.ACTION_USER_PRESENT);
         intentFilter.addAction(Intent.ACTION_SCREEN_ON);
         intentFilter.addAction(ACTION_STOP_SELF);
+        intentFilter.addAction(ACTION_SHOW_VIEW);
         registerReceiver(userPresentReceiver, intentFilter);
 
 
         overlayView = new AdvertismentView(this);
+        overlayView.setOnIteractionCallback(new AdvertismentView.OnIteractionCallback() {
+            @Override
+            public void onWebViewClicked(String url) {
+
+                sendBroadcast(new Intent(ACTION_SHOW_VIEW));
+//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//                Intent browserIntent = new Intent(AdOverlayService.this, WalletActivity.class);
+//                startActivity(browserIntent);
+            }
+        });
         hideView();
     }
 

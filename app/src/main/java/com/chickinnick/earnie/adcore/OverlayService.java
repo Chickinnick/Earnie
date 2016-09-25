@@ -8,6 +8,7 @@ import android.os.IBinder;
 
 public class OverlayService extends Service {
 
+    public static final String ACTION_SHOW_VIEW = "show_view";
 
     public static final String ACTION_STOP_SELF = "key_flag";
     protected boolean foreground = false;

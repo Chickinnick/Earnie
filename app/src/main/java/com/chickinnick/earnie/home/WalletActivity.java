@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
@@ -21,6 +22,7 @@ import io.paperdb.Paper;
 public class WalletActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int OVERLAY_PERMISSION_REQUEST_CODE = 1234;
+    public static final String EXTRA_NEW_EARNIE = "new_earnie";
     private ActivityWalletBinding binding;
 
     @Override
@@ -30,6 +32,17 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
+
+
         Typeface typeface = EarineApp.getRegularTypeface();
         binding.title.setTypeface(typeface);
         binding.drawerBtn.setOnClickListener(this);
@@ -37,7 +50,6 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
         binding.cashBtn.setOnClickListener(this);
 
         Typeface earniesTf = Typeface.createFromAsset(getAssets(), "Pacifico.ttf");
-        binding.earniesValue.setText("0");//TODO attach model
         binding.earniesValue.setTypeface(earniesTf);
         binding.earnies.setTypeface(earniesTf);
         binding.youGotTv.setTypeface(earniesTf);

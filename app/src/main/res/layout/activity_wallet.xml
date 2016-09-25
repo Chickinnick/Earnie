@@ -75,7 +75,7 @@
                     android:paddingBottom="0dp"
                     android:textAlignment="center"
                     android:layout_centerInParent="true"
-                    android:text="2"
+                    android:text="@{Integer.toString(user.earnieValue)}"
                     android:textColor="@color/yellow"
                     android:textSize="@dimen/digit_size"
                     android:id="@+id/earnies_value"

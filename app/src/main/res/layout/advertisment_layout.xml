@@ -15,7 +15,7 @@
     <WebView
         android:layout_below="@+id/move_control"
 
-        android:id="@+id/cover_layout"
+        android:id="@+id/webview"
         android:layout_width="@dimen/image_w"
         android:layout_height="@dimen/image_h" />
 

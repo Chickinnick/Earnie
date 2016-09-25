@@ -3,6 +3,13 @@ package com.chickinnick.earnie.adcore;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.view.WindowManager;
+
+import com.chickinnick.earnie.EarineApp;
+import com.chickinnick.earnie.home.WalletActivity;
+import com.chickinnick.earnie.model.User;
+
+import io.paperdb.Paper;
 
 public class UserPresentReceiver extends BroadcastReceiver {
 
@@ -25,6 +32,20 @@ public class UserPresentReceiver extends BroadcastReceiver {
             }
         } else if (intent.getAction().equals(OverlayService.ACTION_STOP_SELF)) {
             adService.stopSelf();
+        } else if (intent.getAction().equals(OverlayService.ACTION_SHOW_VIEW)) {
+//            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            Intent browserIntent = new Intent(context, WalletActivity.class);
+            browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            browserIntent.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED +
+                    WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD +
+                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON +
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
+            User user = Paper.book().read(EarineApp.KEY_CURRENT_USER);
+            user.incrementEarnie();
+            Paper.book().write(EarineApp.KEY_CURRENT_USER, user);
+
+            context.startActivity(browserIntent);
         }
     }
 
