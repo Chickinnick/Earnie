@@ -43,6 +43,7 @@
     <string name="sign">!</string>
     <string name="right_now_you_got">Right now you got</string>
     <string name="log_in_with_fb">Login with Facebook</string>
+    <string name="log_out_btn">Log out</string>
 
     <!-- {bold}  \ new sentence   -->
     <string-array name="pager_items">
