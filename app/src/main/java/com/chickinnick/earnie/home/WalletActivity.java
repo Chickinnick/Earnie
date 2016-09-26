@@ -10,6 +10,7 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 
 import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
@@ -53,7 +54,13 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
         binding.earniesValue.setTypeface(earniesTf);
         binding.earnies.setTypeface(earniesTf);
         binding.youGotTv.setTypeface(earniesTf);
-
+        binding.switch1.setChecked(Paper.book().read(EarineApp.KEY_AD_MODE, true));
+        binding.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Paper.book().write(EarineApp.KEY_AD_MODE, isChecked);
+            }
+        });
         User user = Paper.book().read(EarineApp.KEY_CURRENT_USER);
         binding.setUser(user);
         binding.userMessage.setTypeface(typeface);

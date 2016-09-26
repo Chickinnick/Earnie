@@ -10,6 +10,7 @@ import io.paperdb.Paper;
 public class EarineApp extends Application {
 
     public static final String KEY_CURRENT_USER = "key_current_user";
+    public static final String KEY_AD_MODE = "ad_mode";
     private static Typeface typefaceRegular;
     private static Typeface typefaceBold;
     private static Typeface typefaceLight;

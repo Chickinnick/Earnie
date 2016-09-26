@@ -3,6 +3,7 @@ package com.chickinnick.earnie.adcore;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.WindowManager;
 
 import com.chickinnick.earnie.EarineApp;
@@ -22,12 +23,22 @@ public class UserPresentReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        boolean isLockScreen = Paper.book().read(EarineApp.KEY_AD_MODE);
+
         if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
-            if (null != adService) {
+            if (null != adService && isLockScreen) {
                 adService.hideView();
+            } else if (null != adService) {
+                adService.showView();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        adService.hideView();
+                    }
+                }, 4000);
             }
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-            if (null != adService) {
+            if (null != adService && isLockScreen) {
                 adService.showView();
             }
         } else if (intent.getAction().equals(OverlayService.ACTION_STOP_SELF)) {
