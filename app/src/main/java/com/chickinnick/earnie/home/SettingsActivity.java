@@ -11,6 +11,7 @@ import android.widget.SeekBar;
 import com.chickinnick.earnie.EarineApp;
 import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.ActivitySettingBinding;
+import com.chickinnick.earnie.payment.PaymentActivity;
 import com.chickinnick.earnie.profile.ProfileActivity;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
@@ -81,6 +82,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.payment_methods:
+                startActivity(new Intent(SettingsActivity.this, PaymentActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.drawer_btn:
                 onBackPressed();

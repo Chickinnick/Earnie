@@ -44,6 +44,7 @@
     <string name="right_now_you_got">Right now you got</string>
     <string name="log_in_with_fb">Login with Facebook</string>
     <string name="log_out_btn">Log out</string>
+    <string name="payment_list_chose">Choose below how do you want to cash your earnies</string>
 
     <!-- {bold}  \ new sentence   -->
     <string-array name="pager_items">
