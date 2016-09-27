@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root_layout"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
-    <ImageView
-        android:layout_margin="5dp"
-        android:id="@+id/move_control"
-        android:src="@drawable/ic_move"
-        android:layout_width="30dp"
-        android:layout_height="30dp" />
 
-    <WebView
-        android:layout_below="@+id/move_control"
+        <ProgressBar
 
+            style="?android:attr/progressBarStyleHorizontal"
+            android:indeterminate="false"
+            android:max="100"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:id="@+id/progress_hide" />
+
+
+        <WebView
+            android:layout_below="@+id/progress_hide"
         android:id="@+id/webview"
         android:layout_width="@dimen/image_w"
         android:layout_height="@dimen/image_h" />
 
 
 </RelativeLayout>
+</layout>

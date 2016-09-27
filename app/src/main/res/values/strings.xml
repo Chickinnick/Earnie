@@ -45,6 +45,7 @@
     <string name="log_in_with_fb">Login with Facebook</string>
     <string name="log_out_btn">Log out</string>
     <string name="payment_list_chose">Choose below how do you want to cash your earnies</string>
+    <string name="Enable_show_everywhere">Enable show everywhere</string>
 
     <!-- {bold}  \ new sentence   -->
     <string-array name="pager_items">

@@ -4,8 +4,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.chickinnick.earnie.R;
+import com.chickinnick.earnie.databinding.AdvertismentLayoutBinding;
 
 public class AdvertismentView extends OverlayView {
 
@@ -13,6 +15,8 @@ public class AdvertismentView extends OverlayView {
     private WebView webView;
     private OnIteractionCallback onIteractionCallback;
 
+    AdvertismentLayoutBinding binding;
+    private ProgressBar progress;
 
     public AdvertismentView(OverlayService service) {
         super(service, R.layout.advertisment_layout, 1);
@@ -33,11 +37,17 @@ public class AdvertismentView extends OverlayView {
         };
 
         webView = (WebView) this.findViewById(R.id.webview);
+        progress = (ProgressBar) this.findViewById(R.id.progress_bar);
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setWebViewClient(webViewClient);
         webView.loadUrl("http://www.metrolyrics.com/top100.html");
+    }
+
+    @Override
+    public void updateProgress(int counter) {
+        progress.setProgress(counter);
     }
 
     public void setOnIteractionCallback(OnIteractionCallback onIteractionCallback) {

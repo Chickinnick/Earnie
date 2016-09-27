@@ -70,6 +70,25 @@
                     android:layout_height="1dp" />
 
 
+                <Switch
+                    android:layout_margin="4dp"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/text_size"
+                    android:textColor="@color/text_default_dark"
+                    android:background="@drawable/btn_setting_list_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Enable_show_everywhere"
+                    android:id="@+id/switch_unlock_setting" />
+
+                <View
+                    android:layout_marginBottom="@dimen/divider_margin"
+                    android:layout_marginTop="@dimen/divider_margin"
+                    android:background="@color/grey_middle"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
+
+
                 <android.support.v7.widget.AppCompatButton
                     android:background="@drawable/btn_setting_list_background"
                     android:text="@string/about_earnie"

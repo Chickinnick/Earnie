@@ -3,7 +3,6 @@ package com.chickinnick.earnie.adcore;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.view.WindowManager;
 
 import com.chickinnick.earnie.EarineApp;
@@ -30,12 +29,7 @@ public class UserPresentReceiver extends BroadcastReceiver {
                 adService.hideView();
             } else if (null != adService) {
                 adService.showView();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adService.hideView();
-                    }
-                }, 4000);
+                adService.startHideTimeout();
             }
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             if (null != adService && isLockScreen) {

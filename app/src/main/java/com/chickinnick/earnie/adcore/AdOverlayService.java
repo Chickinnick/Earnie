@@ -8,8 +8,12 @@ import android.view.View;
 
 import com.chickinnick.earnie.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class AdOverlayService extends OverlayService {
 
+    public static final int DELAY_MILLIS_TIMEOUT = 4_000;
     private AdvertismentView overlayView;
     private UserPresentReceiver userPresentReceiver;
     private IntentFilter intentFilter;
@@ -79,4 +83,18 @@ public class AdOverlayService extends OverlayService {
         overlayView.setVisibility(View.VISIBLE);
     }
 
+    public void startHideTimeout() {
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            int counter = 0;
+
+            @Override
+            public void run() {
+                while (counter < 100) {
+                    counter++;
+                    overlayView.updateProgress(counter);
+                }
+                overlayView.hide();
+            }
+        }, 0, 40);//4000ms
+    }
 }

@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
 import com.chickinnick.earnie.EarineApp;
@@ -13,6 +14,8 @@ import com.chickinnick.earnie.R;
 import com.chickinnick.earnie.databinding.ActivitySettingBinding;
 import com.chickinnick.earnie.payment.PaymentActivity;
 import com.chickinnick.earnie.profile.ProfileActivity;
+
+import io.paperdb.Paper;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
@@ -45,6 +48,15 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         activitySettingsBinding.low.setOnClickListener(indicatorClick);
         activitySettingsBinding.norm.setOnClickListener(indicatorClick);
         activitySettingsBinding.high.setOnClickListener(indicatorClick);
+
+        activitySettingsBinding.switchUnlockSetting.setTypeface(typeface);
+        activitySettingsBinding.switchUnlockSetting.setChecked(Paper.book().read(EarineApp.KEY_AD_MODE, true));
+        activitySettingsBinding.switchUnlockSetting.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Paper.book().write(EarineApp.KEY_AD_MODE, isChecked);
+            }
+        });
 
     }
 

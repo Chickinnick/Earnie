@@ -115,4 +115,5 @@ public abstract class OverlayView extends RelativeLayout {
         super.setVisibility(View.VISIBLE);
     }
 
+    public abstract void updateProgress(int counter);
 }
