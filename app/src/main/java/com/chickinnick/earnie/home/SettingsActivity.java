@@ -5,6 +5,8 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
@@ -39,6 +41,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         activitySettingsBinding.drawerBtn.setOnClickListener(this);
         activitySettingsBinding.paymentMethods.setOnClickListener(this);
         activitySettingsBinding.profile.setOnClickListener(this);
+        final GestureDetector gestureDetector = new GestureDetector(new GestureListener());
+        activitySettingsBinding.touchStub.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                gestureDetector.onTouchEvent(event);
+                return true;
+            }
+        });
 
 
         activitySettingsBinding.adFreqSeekbar.setProgress(1);
@@ -133,4 +143,22 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
+
+
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        private final int SWIPE_MIN_DISTANCE = 10;
+        private final int SWIPE_THRESHOLD_VELOCITY = 20;
+
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                onBackPressed();
+                return true;
+            }
+            return false;
+        }
+    }
+
 }

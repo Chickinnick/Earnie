@@ -43,12 +43,13 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-        final GestureDetector gestureDetector = new GestureDetector(this, new GestureListener());
+        final GestureDetector gestureDetector = new GestureDetector(new GestureListener());
 
-        binding.getRoot().setOnTouchListener(new View.OnTouchListener() {
+        binding.touchStub.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return gestureDetector.onTouchEvent(event);
+                gestureDetector.onTouchEvent(event);
+                return true;
             }
         });
 
@@ -122,17 +123,26 @@ public class WalletActivity extends AppCompatActivity implements View.OnClickLis
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
 
-        private final int SWIPE_MIN_DISTANCE = 120;
-        private final int SWIPE_THRESHOLD_VELOCITY = 200;
+        private final int SWIPE_MIN_DISTANCE = 10;
+        private final int SWIPE_THRESHOLD_VELOCITY = 20;
+
+
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+            /*if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                 // Right to left, your code here
-                return true;
-            } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                 startActivity(new Intent(WalletActivity.this, SettingsActivity.class));
+
                 return true;
+            } else*/
+            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                // if(e1.getFlags() == MotionEvent.EDGE_RIGHT || e2.getFlags() == MotionEvent.EDGE_RIGHT) {
+                startActivity(new Intent(WalletActivity.this, SettingsActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                return true;
+                //}
             }
             return false;
         }
