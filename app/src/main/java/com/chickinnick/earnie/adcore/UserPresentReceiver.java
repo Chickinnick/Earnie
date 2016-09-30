@@ -22,13 +22,13 @@ public class UserPresentReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        boolean isLockScreen = Paper.book().read(EarineApp.KEY_AD_MODE);
+        boolean isLockScreen = Paper.book().read(EarineApp.KEY_AD_MODE, true);
 
         if (intent.getAction().equals(Intent.ACTION_USER_PRESENT)) {
             if (null != adService && isLockScreen) {
                 adService.hideView();
             } else if (null != adService) {
-                adService.showView();
+                adService.showViewFullScreen();
                 adService.startHideTimeout();
             }
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {

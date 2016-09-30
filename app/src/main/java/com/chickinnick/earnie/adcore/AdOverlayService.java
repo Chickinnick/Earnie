@@ -4,19 +4,22 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.chickinnick.earnie.R;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class AdOverlayService extends OverlayService {
 
     public static final int DELAY_MILLIS_TIMEOUT = 4_000;
+    private static final String UPDATE_PROGRESS = "updp";
     private AdvertismentView overlayView;
     private UserPresentReceiver userPresentReceiver;
     private IntentFilter intentFilter;
+    private final String keyProgress = "progress";
+
 
     @Override
     public void onCreate() {
@@ -29,7 +32,6 @@ public class AdOverlayService extends OverlayService {
         intentFilter.addAction(ACTION_STOP_SELF);
         intentFilter.addAction(ACTION_SHOW_VIEW);
         registerReceiver(userPresentReceiver, intentFilter);
-
 
         overlayView = new AdvertismentView(this);
         overlayView.setOnIteractionCallback(new AdvertismentView.OnIteractionCallback() {
@@ -83,18 +85,62 @@ public class AdOverlayService extends OverlayService {
         overlayView.setVisibility(View.VISIBLE);
     }
 
-    public void startHideTimeout() {
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            int counter = 0;
+    public void showViewFullScreen() {
+        overlayView.setupLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        overlayView.reload();
+        overlayView.setVisibility(View.VISIBLE);
 
-            @Override
-            public void run() {
-                while (counter < 100) {
-                    counter++;
-                    overlayView.updateProgress(counter);
+    }
+
+    public void startHideTimeout() {
+        new HideAsyncTask(DELAY_MILLIS_TIMEOUT).execute();
+    }
+
+
+    class HideAsyncTask extends AsyncTask<Integer, Integer, Integer> {
+        private final float delay;
+        private int timeout;
+        int counter = 0;
+
+        public HideAsyncTask(int timeout) {
+            this.timeout = timeout;
+            this.delay = timeout / 1000f;
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... params) {
+//             while (counter < 100) {
+//                 counter++;
+                   /*new Handler().post(new Runnable() {
+                       @Override
+                       public void run() {*/
+                       /*}
+                   });*/
+//             }
+            while (counter < 100) {
+                try {
+                    Thread.sleep((long) delay);
+                    Log.d("task", "sleep:" + delay);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-                overlayView.hide();
+                counter++;
+                publishProgress(counter);
             }
-        }, 0, 40);//4000ms
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            overlayView.updateProgress(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            // super.onPostExecute(integer);
+            overlayView.hide();
+            cancel(true);
+        }
     }
 }

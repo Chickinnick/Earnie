@@ -16,6 +16,7 @@ import io.paperdb.Paper;
 public abstract class OverlayView extends RelativeLayout {
 
     public static final String KEY_SAVED_ViEW_POSITION = "saved_x_y";
+    private final OverlayService service;
     protected WindowManager.LayoutParams layoutParams;
 
     private int layoutResId;
@@ -23,6 +24,7 @@ public abstract class OverlayView extends RelativeLayout {
 
     public OverlayView(OverlayService service, final int layoutResId, int notificationId) {
         super(service);
+        this.service = service;
         this.layoutResId = layoutResId;
         this.notificationId = notificationId;
         setOnTouchListener(new View.OnTouchListener() {
@@ -66,12 +68,7 @@ public abstract class OverlayView extends RelativeLayout {
     private void setupLayoutParams() {
         int imW = getResources().getDimensionPixelSize(R.dimen.image_w);
         int imH = getResources().getDimensionPixelSize(R.dimen.image_h);
-        layoutParams = new WindowManager.LayoutParams(imW, imH,
-                WindowManager.LayoutParams.TYPE_SYSTEM_ERROR,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                        | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
-                        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                PixelFormat.TRANSLUCENT);
+        setupLayoutParams(imW, imH);
 
         Pair<Integer, Integer> savedXY = Paper.book().read(KEY_SAVED_ViEW_POSITION, null);
         if (null != savedXY) {
@@ -80,10 +77,20 @@ public abstract class OverlayView extends RelativeLayout {
         }
     }
 
+    public void setupLayoutParams(int imW, int imH) {
+        layoutParams = new WindowManager.LayoutParams(imW, imH,
+                WindowManager.LayoutParams.TYPE_SYSTEM_ERROR,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                        | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+                        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                PixelFormat.TRANSLUCENT);
+    }
+
     private void inflateView() {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(layoutResId, this);
         onInflateView();
+
     }
 
 
@@ -116,4 +123,9 @@ public abstract class OverlayView extends RelativeLayout {
     }
 
     public abstract void updateProgress(int counter);
+
+    public void reload() {
+        ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).removeView(this);
+        ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).addView(this, layoutParams);
+    }
 }
