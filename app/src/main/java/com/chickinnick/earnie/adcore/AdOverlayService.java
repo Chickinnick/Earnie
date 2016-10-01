@@ -1,5 +1,7 @@
 package com.chickinnick.earnie.adcore;
 
+import android.app.Activity;
+import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -14,11 +16,10 @@ import com.chickinnick.earnie.R;
 public class AdOverlayService extends OverlayService {
 
     public static final int DELAY_MILLIS_TIMEOUT = 4_000;
-    private static final String UPDATE_PROGRESS = "updp";
+    public static final String KEY_EXTRA_URL = "urlextra";
     private AdvertismentView overlayView;
     private UserPresentReceiver userPresentReceiver;
     private IntentFilter intentFilter;
-    private final String keyProgress = "progress";
 
 
     @Override
@@ -37,8 +38,9 @@ public class AdOverlayService extends OverlayService {
         overlayView.setOnIteractionCallback(new AdvertismentView.OnIteractionCallback() {
             @Override
             public void onWebViewClicked(String url) {
-
-                sendBroadcast(new Intent(ACTION_SHOW_VIEW));
+              Intent intent =  new Intent(ACTION_SHOW_VIEW);
+                intent.putExtra(KEY_EXTRA_URL, url);
+                sendBroadcast(intent);
 //                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 //                Intent browserIntent = new Intent(AdOverlayService.this, WalletActivity.class);
 //                startActivity(browserIntent);
@@ -81,7 +83,11 @@ public class AdOverlayService extends OverlayService {
         overlayView.setVisibility(View.GONE);
     }
 
-    public void showView() {
+    public void showSmallView() {
+        int imW = getResources().getDimensionPixelSize(R.dimen.image_w);
+        int imH = getResources().getDimensionPixelSize(R.dimen.image_h);
+        overlayView.setupLayoutParams(imW, imH);
+        overlayView.reload();
         overlayView.setVisibility(View.VISIBLE);
     }
 
@@ -92,9 +98,20 @@ public class AdOverlayService extends OverlayService {
         overlayView.setVisibility(View.VISIBLE);
 
     }
+    public void lockScreen() {
+        KeyguardManager keyguardManager = (KeyguardManager)getSystemService(Activity.KEYGUARD_SERVICE);
+        KeyguardManager.KeyguardLock lock = keyguardManager.newKeyguardLock(KEYGUARD_SERVICE);
+        lock.reenableKeyguard();
+    }
 
     public void startHideTimeout() {
         new HideAsyncTask(DELAY_MILLIS_TIMEOUT).execute();
+    }
+
+    public void unlockScreen() {
+        KeyguardManager keyguardManager = (KeyguardManager)getSystemService(Activity.KEYGUARD_SERVICE);
+        KeyguardManager.KeyguardLock lock = keyguardManager.newKeyguardLock(KEYGUARD_SERVICE);
+        lock.disableKeyguard();
     }
 
 
@@ -110,14 +127,6 @@ public class AdOverlayService extends OverlayService {
 
         @Override
         protected Integer doInBackground(Integer... params) {
-//             while (counter < 100) {
-//                 counter++;
-                   /*new Handler().post(new Runnable() {
-                       @Override
-                       public void run() {*/
-                       /*}
-                   });*/
-//             }
             while (counter < 100) {
                 try {
                     Thread.sleep((long) delay);
